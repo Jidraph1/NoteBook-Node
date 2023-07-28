@@ -3,7 +3,7 @@ Content-Type: application/json
 
 { 
     "title":"Dear Diary",
-    "content":"Dear Diary, this is a quick recap of my not so interesting life",
+    "content":"Dear Diary this is a quick recap of my not so interesting life",
     "created_at":"2022-02-05"
 }
 

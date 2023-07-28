@@ -32,6 +32,7 @@ const createNote = async (req, res) => {
         .input("title", mssql.VarChar, title)
         .input("content", mssql.VarChar, content)
         .input("created_at", mssql.VarChar, created_at)
+        
         .execute(createNote)
 
       if (result.rowsAffected == 1) {
