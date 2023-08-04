@@ -1,5 +1,7 @@
 const { v4 } = require("uuid");
 const mssql = require("mssql");
+const dotenv = require ('dotenv')
+const crypto =  require('crypto')
 const { sqlConfig } = require("../Config/config.js");
 
 const notes = [];
@@ -23,8 +25,8 @@ const createNote = async (req, res) => {
 
     const pool = await mssql.connect(sqlConfig);
 
-    if (pool.connected) {
-      console.log(req.body);
+    // if (pool.connected) {
+    //   console.log(req.body);
 
       const result = await pool
         .request()
@@ -42,7 +44,7 @@ const createNote = async (req, res) => {
       } else {
         return res.json({ message: "Creation failed" });
       }
-    }
+    // }
   } catch (error) {
     return res.json({ error });
   }
@@ -81,12 +83,47 @@ const getOneNote = async (req, res) => {
   }
 };
 
+const deleteNote = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const pool = await mssql.connect(sqlConfig);
+
+    const result = await pool
+      .request()
+      .input("id", id)
+      .execute("deleteNote");
+
+    if (result.rowsAffected == 1) {
+      res.json({
+        message: "Note deleted successfully",
+      });
+    } else {
+      res.json({
+        message: "Note not found",
+      });
+    }
+  } catch (error) {
+    return res.json({ Error: error });
+  }
+};
+
+
+const generateBytes = ()=>{
+  const bytes = crypto.randomBytes(20)
+  // console.log(bytes);
+  return bytes
+}
+
+generateBytes()
 
 
 module.exports= {
     createNote,
     getAllNotes,
     getOneNote,
+    deleteNote,
+    generateBytes
 }
 
 

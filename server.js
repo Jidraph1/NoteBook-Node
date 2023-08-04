@@ -1,7 +1,10 @@
-const express = require("express");
+const express = require ('express');
+const cors = require ('cors')
 const { projectrouter } = require("./Routes/noteRoutes");
 
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 app.use("/note", projectrouter);

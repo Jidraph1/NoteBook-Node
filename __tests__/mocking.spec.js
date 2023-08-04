@@ -6,7 +6,7 @@ jest.mock("crypto")
 test("Generate Bytes" , async ()=>{
     
     crypto.randomBytes.mockResolvedValueOnce("abcdefghig")
-    const res = await generateBytest()
+    const res = await generateBytes()
     // console.log(res);
 })
 
