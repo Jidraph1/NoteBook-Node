@@ -1,0 +1,39 @@
+const crypto = require('crypto')
+const {generateBytes} = require("../Controllers/notesController")
+
+jest.mock("crypto")
+
+test("Generate Bytes" , async ()=>{
+    
+    crypto.randomBytes.mockResolvedValueOnce("abcdefghig")
+    const res = await generateBytest()
+    // console.log(res);
+})
+
+
+test('mock implementation', ()=>{
+    const mockFN = jest.fn(()=> "default").mockImplementation(()=>{
+        return "First Call";
+    }).mockImplementation(()=>"Second Call")
+
+    const res = mockFN()
+    const res2 = mockFN()
+
+    console.log(res);
+    console.log(res2);
+})
+
+test('mock implementation Once', ()=>{
+    const mockFN = jest.fn(()=> "default").mockImplementationOnce(()=>{
+        return "First Call";
+    }).mockImplementationOnce(()=>"Second Call")
+
+    const res = mockFN()
+    const res2 = mockFN()
+    const res3 = mockFN()
+
+    console.log(res);
+    console.log(res2);
+    console.log(res3);
+})
+
