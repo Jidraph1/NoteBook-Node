@@ -68,7 +68,7 @@ describe("Gets all Notes", () => {
 
     const res = {
       json:jest.fn(),
-      // status:jest.fn(()=> res)
+      status:jest.fn(()=> res)
       
     }
 
@@ -81,8 +81,8 @@ describe("Gets all Notes", () => {
 
     await getAllNotes(req, res);
 
-    // expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.status).mock.instances[0].status
+    expect(res.status).toHaveBeenCalledWith(200);
+    // expect(res.status).mock.instances[0].status
     expect(mssql.connect).toHaveBeenCalled()
     expect(res.json).toHaveBeenCalledWith({ notes: mockAllNotes});
   });
@@ -123,7 +123,7 @@ describe("Getting Note By ID", () => {
     await getOneNote(req, res);
 
 
-    // expect(mssql.connect).toHaveBeenCalled()
+    expect(mssql.connect).toHaveBeenCalled()
     expect(res.json).toHaveBeenCalledWith({ notes: [mockNoteWithId] });
 
     res.json.mockRestore();
